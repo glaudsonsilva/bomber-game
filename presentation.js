@@ -20,6 +20,8 @@ function renderScreen() {
         context.fillRect(player.x, player.y, 1, 1);
     };
 
+    gameRules();
+
     requestAnimationFrame(renderScreen);
 }
 

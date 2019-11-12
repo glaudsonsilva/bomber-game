@@ -10,3 +10,12 @@ const game = {
 
 const currentPlayer = game.players['player1'];
 
+function gameRules() {
+
+    for (bombId in game.bombs) {
+        var bomb = game.bombs[bombId];
+
+        if (bomb.time <= new Date())
+            delete game.bombs[bombId];
+    };
+}

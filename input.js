@@ -23,7 +23,9 @@ function handleKeydown(event) {
     }
 
     if (keyPressed == ' ') {
-        game.bombs['bomb1'] = { x: currentPlayer.x, y: currentPlayer.y };
+        var d = new Date(); 
+        d.setSeconds(d.getSeconds() + 2)
+        game.bombs['bomb1'] = { x: currentPlayer.x, y: currentPlayer.y, time: d };
         return;
     }
 }
