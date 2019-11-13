@@ -1,27 +1,39 @@
 
-document.addEventListener('keydown', handleKeydown);
+const keyboardListener = createKeyboardListener(); 
+keyboardListener.subscribe(game.movePlayer); 
+keyboardListener.subscribe(game.plantBomb); 
 
-function handleKeydown(event) {
-    const keyPressed = event.key;
+function createKeyboardListener() {
+    const state = {
+        observers: []
+    }
 
-    if (keyPressed == 'ArrowUp') {
-        changePlayerPosition('up');
-        return;
+    function subscribe(observerFunction) {
+        state.observers.push(observerFunction);
     }
-    if (keyPressed == 'ArrowDown') {
-        changePlayerPosition('down');
-        return;
+
+    function notifyAll(command) {
+        console.log(`Notifying ${state.observers.length} observers`);
+
+        for (const observerFunction of state.observers) {
+            observerFunction(command);
+        }
     }
-    if (keyPressed == 'ArrowLeft') {
-        changePlayerPosition('left');
-        return;
+
+    document.addEventListener('keydown', handleKeydown);
+
+    function handleKeydown(event) {
+        const keyPressed = event.key;
+
+        const command = {
+            playerId: 'player1',
+            keyPressed
+        };
+
+        notifyAll(command);
     }
-    if (keyPressed == 'ArrowRight') {
-        changePlayerPosition('right');
-        return;
-    }
-    if (keyPressed == ' ') {
-        addBomb();
-        return;
+
+    return {
+        subscribe
     }
 }
