@@ -5,27 +5,23 @@ function handleKeydown(event) {
     const keyPressed = event.key;
 
     if (keyPressed == 'ArrowUp') {
-        game.players.player1.y--;
+        changePlayerPosition('up');
         return;
     }
     if (keyPressed == 'ArrowDown') {
-        game.players.player1.y++;
+        changePlayerPosition('down');
         return;
     }
     if (keyPressed == 'ArrowLeft') {
-        game.players.player1.x--;
+        changePlayerPosition('left');
         return;
     }
-
     if (keyPressed == 'ArrowRight') {
-        game.players.player1.x++;
+        changePlayerPosition('right');
         return;
     }
-
     if (keyPressed == ' ') {
-        var d = new Date(); 
-        d.setSeconds(d.getSeconds() + 2)
-        game.bombs['bomb1'] = { x: currentPlayer.x, y: currentPlayer.y, time: d };
+        addBomb();
         return;
     }
 }
