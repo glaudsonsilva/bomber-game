@@ -27,6 +27,12 @@ function renderScreen() {
         context.fillRect(player.x, player.y, player.size, player.size);
     };
 
+    for (wallId in game.state.walls) {
+        const wall = game.state.walls[wallId];
+        context.fillStyle = 'brown';
+        context.fillRect(wall.x, wall.y, wall.xLength, wall.yLength);
+    };
+
     game.refreshState();
 
     requestAnimationFrame(renderScreen);
